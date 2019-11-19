@@ -37,9 +37,12 @@ class TestVTime(unittest.TestCase):
     def test_mesure(self):
         """ Test the stimeit function """
 
-        out = v_time.mesure(sleep, 10, 1)
+        num_tests = 10
+        sleep_time = 0.1
 
-        self.assertEqual(len(out), 10)
+        out = v_time.mesure(sleep, sleep_time, n_iterations=num_tests)
 
-        # 10 times 1 second should be between 9 and 11
-        self.assertTrue(9 <= sum(out) <= 11)
+        self.assertEqual(len(out), num_tests)
+
+        # n times 1 second should be between 9 and 11
+        self.assertTrue((num_tests - 1) * sleep_time <= sum(out) <= (num_tests + 1) * sleep_time)

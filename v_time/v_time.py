@@ -27,9 +27,9 @@ def timeit(func):
     @functools.wraps(func)
     def timed(*args, **kwa):
         """ Prints the execution time of the decorated function """
-        t0 = perf_counter()
+        time0 = perf_counter()
         result = func(*args, **kwa)
-        total_time = round((perf_counter() - t0) / 60, 2)
+        total_time = round((perf_counter() - time0) / 60, 2)
 
         print("timeit: '{}' in {:.2f} min".format(func.__name__, total_time))
 
@@ -58,9 +58,9 @@ def stimeit(output_func=print):
         @functools.wraps(func)
         def timed_execution(*args, **kwa):
             """ Prints the execution time of the decorated function """
-            t0 = perf_counter()
+            time0 = perf_counter()
             result = func(*args, **kwa)
-            total_time = perf_counter() - t0
+            total_time = perf_counter() - time0
 
             output_func("stimeit: '{}' in {:.2f}".format(func.__name__, round(total_time / 60, 2)))
 
@@ -71,14 +71,14 @@ def stimeit(output_func=print):
     return timeit_decorator
 
 
-def mesure(func, n_iterations=10, *args, **kwargs):
+def mesure(func, *args, n_iterations=10, **kwargs):
     """ Allows to time a function n times """
 
     out = []
     for _ in range(n_iterations):
-        t0 = perf_counter()
-        result = func(*args, **kwargs)
-        out.append(perf_counter() - t0)
+        time0 = perf_counter()
+        _ = func(*args, **kwargs)
+        out.append(perf_counter() - time0)
 
     return out
 
