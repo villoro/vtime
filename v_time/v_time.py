@@ -75,7 +75,7 @@ def mesure(func, *args, n_iterations=10, **kwargs):
     out = []
     for _ in range(n_iterations):
         time0 = perf_counter()
-        _ = func(*args, **kwargs)
+        func(*args, **kwargs)
         out.append(perf_counter() - time0)
 
     return out
