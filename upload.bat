@@ -11,4 +11,4 @@ python -m twine upload dist/*
 :: python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 :: Check installation from test
-:: pip install --index-url https://test.pypi.org/simple/ v-palette
+:: pip install --index-url https://test.pypi.org/simple/ v-time
