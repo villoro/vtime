@@ -28,10 +28,9 @@ def timeit(func):
     def timed(*args, **kwa):
         """ Prints the execution time of the decorated function """
         t0 = perf_counter()
-
         result = func(*args, **kwa)
-
         total_time = round((perf_counter() - t0) / 60, 2)
+
         print("timeit: '{}' in {:.2f} min".format(func.__name__, total_time))
 
         return result
@@ -59,11 +58,9 @@ def stimeit(output_func=print):
         @functools.wraps(func)
         def timed_execution(*args, **kwa):
             """ Prints the execution time of the decorated function """
-            t0 = time()
-
+            t0 = perf_counter()
             result = func(*args, **kwa)
-
-            total_time = time() - t0
+            total_time = perf_counter() - t0
 
             output_func("stimeit: '{}' in {:.2f}".format(func.__name__, round(total_time / 60, 2)))
 
