@@ -10,10 +10,10 @@ install:
 - pip install pylint
 
 script:
-- nosetests --with-coverage --cover-package=v_palette --cover-erase --cover-inclusive
+- nosetests --with-coverage --cover-package=v_time --cover-erase --cover-inclusive
 - pylint --disable=W,R test
 - cd v_time
-- pylint --disable=W,R v_palette
+- pylint --disable=W,R v_time
 - cd ..
 
 after_success:
