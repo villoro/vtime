@@ -10,8 +10,6 @@
 import functools
 from time import perf_counter
 
-import yaml
-
 
 def timeit(func):
     """
@@ -81,12 +79,3 @@ def mesure(func, *args, n_iterations=10, **kwargs):
         out.append(perf_counter() - time0)
 
     return out
-
-
-def store_results(data, test_name):
-    """ Store results as a yaml """
-
-    with open(f"results/{test_name}.yaml", "w") as outfile:
-        yaml.dump(data, outfile, default_flow_style=False)
-
-    print(f"\nAll tests done for {test_name}")
