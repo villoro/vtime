@@ -1,9 +1,11 @@
 import io
 from setuptools import setup
 
+from v_time import __version__
+
 setup(
     name="v_time",
-    version="1.0.1",
+    version=__version__,
     author="Arnau Villoro",
     author_email="arnau@villoro.com",
     packages=["v_time"],
