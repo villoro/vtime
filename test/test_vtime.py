@@ -46,3 +46,17 @@ class TestVTime(unittest.TestCase):
 
         # n times 1 second should be between 9 and 11
         self.assertTrue((num_tests - 1) * sleep_time <= sum(out) <= (num_tests + 1) * sleep_time)
+
+    def test_time_human(self):
+        """ Test get time_human function """
+
+        data = [
+            (58, "58.00 s"),
+            (90, "1.50 min"),
+            (3600, "1.00 h"),
+            (3600 * 24, "1.00 days"),
+            (3600 * 24 * 365, "1.00 years"),
+        ]
+
+        for value, result in data:
+            self.assertEqual(v_time.time_human(value), result)

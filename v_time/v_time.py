@@ -11,6 +11,19 @@ import functools
 from time import perf_counter
 
 
+def time_human(x):
+    """ Gets time as human readable """
+
+    # Round time
+    x = round(x, 2)
+
+    for number, unit in [(60, "s"), (60, "min"), (24, "h"), (365, "days")]:
+        if abs(x) < number:
+            return f"{x:.2f} {unit}"
+        x /= number
+    return f"{x:.2f} years"
+
+
 def timeit(func):
     """
         Decorator that prints the execution time of a function. Example:
@@ -27,9 +40,9 @@ def timeit(func):
         """ Prints the execution time of the decorated function """
         time0 = perf_counter()
         result = func(*args, **kwa)
-        total_time = round((perf_counter() - time0) / 60, 2)
+        total_time = time_human(perf_counter() - time0)
 
-        print("timeit: '{}' in {:.2f} min".format(func.__name__, total_time))
+        print(f"timeit: '{func.__name__}' in {total_time}")
 
         return result
 
@@ -58,9 +71,9 @@ def stimeit(output_func=print):
             """ Prints the execution time of the decorated function """
             time0 = perf_counter()
             result = func(*args, **kwa)
-            total_time = perf_counter() - time0
+            total_time = time_human(perf_counter() - time0)
 
-            output_func("stimeit: '{}' in {:.2f}".format(func.__name__, round(total_time / 60, 2)))
+            output_func(f"stimeit: '{func.__name__}' in {total_time}")
 
             return result
 
