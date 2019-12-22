@@ -49,6 +49,37 @@ def timeit(func):
     return timed
 
 
+def timeit_out(func):
+    """
+        Decorator that returns both the execution time of a function and the result.
+
+        Returns:
+            result: output of the original function
+            time:   total time elapsed
+
+        Example:
+            from time import sleep
+
+            @timeit_out
+            def sleep_one_sec():
+                sleep(1)
+
+            sleep_one_sec()
+            out: None, 1
+    """
+
+    @functools.wraps(func)
+    def timed(*args, **kwa):
+        """ Calculate the execution time of the decorated function """
+        time0 = perf_counter()
+        result = func(*args, **kwa)
+        total_time = perf_counter() - time0
+
+        return result, total_time
+
+    return timed
+
+
 def stimeit(output_func=print):
     """
         Decorator that displays the execution time of a function.
