@@ -23,6 +23,21 @@ class TestVTime(unittest.TestCase):
 
         self.assertEqual(dummy_function(42), timeit_function(42))
 
+    def test_timeit_out(self):
+        """ Test the timeit_out function """
+
+        @v_time.timeit_out
+        def sleep_1():
+            return sleep(1)
+
+        out, total_time = sleep_1()
+
+        # Check output
+        self.assertIsNone(out)
+
+        # Check time (one decimal precision)
+        self.assertAlmostEqual(total_time, 1, places=1)
+
     def test_stimeit(self):
         """ Test the stimeit function """
 
